@@ -21,8 +21,7 @@
 // Can mess with this settings as I see fit in case I want to assign more content items on a page.
 $limit = 3;
 $currentAmount = 1;
-
-
+$image = "Talkie";
 ?>
 
 
@@ -35,11 +34,20 @@ $currentAmount = 1;
       @if($currentAmount > $limit)
       @break
       @endif
+      @if ($currentAmount === 2)
+      <?php
+      $image = "Rabbit";
+      ?>
+      @elseif ($currentAmount === 3)
+      <?php
+      $image = "Shield";
+      ?>
+      @endif
 
       <li>
         <div>
           <div class="imagecontainer">
-            <img src="images/Talkie.png" alt="talkieimage">
+            <img src="images/{{$image}}.png" alt="talkieimage">
           </div>
           <h2>{{$contentItem->title}}</h2>
           <p>{{$contentItem->content}}</p>
@@ -48,7 +56,9 @@ $currentAmount = 1;
           </div>
         </div>
       </li>
-      {{$currentAmount++}}
+      <?php
+      $currentAmount++;
+      ?>
       @endforeach
       @else
       <h2 class="no-content">Oops! There doesn't seem to be any content here.</h2>
