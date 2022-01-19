@@ -176,3 +176,11 @@ ul#puzzle li {
     transition: 0ms background-color;
   }
 }
+
+// When there is no content
+.no-content {
+  color: white;
+  background-color: #858585;
+  border-radius: 8px;
+  padding: 10px;
+}

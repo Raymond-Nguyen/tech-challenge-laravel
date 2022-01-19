@@ -4,7 +4,8 @@
 @section('head')
 <title>TechChallenge | Home</title>
 <link rel="stylesheet" href="/css/index.css">
-<script src="/js/homepage.js"></script>
+<script src="js/homepage.js"></script>
+
 
 @endsection
 
@@ -16,12 +17,43 @@
 
 @section('content')
 
-<!-- 110 -->
+<?php
+// Can mess with this settings as I see fit in case I want to assign more content items on a page.
+$limit = 3;
+$currentAmount = 1;
+
+
+?>
+
+
 
 <body>
   <section>
-    <h1 id="loading">Loading...</h1>
-    <ul id="contentList" class="contentList"></ul>
+    <ul id="contentList" class="contentList">
+      @if(count($contentItems) > 0)
+      @foreach($contentItems as $contentItem)
+      @if($currentAmount > $limit)
+      @break
+      @endif
+
+      <li>
+        <div>
+          <div class="imagecontainer">
+            <img src="images/Talkie.png" alt="talkieimage">
+          </div>
+          <h2>{{$contentItem->title}}</h2>
+          <p>{{$contentItem->content}}</p>
+          <div class="learnmore-div">
+            <a href="/learnmore/{{$contentItem->id}}">Learn More</a>
+          </div>
+        </div>
+      </li>
+      {{$currentAmount++}}
+      @endforeach
+      @else
+      <h2 class="no-content">Oops! There doesn't seem to be any content here.</h2>
+      @endif
+    </ul>
   </section>
 
   <section id="javascript-puzzle">

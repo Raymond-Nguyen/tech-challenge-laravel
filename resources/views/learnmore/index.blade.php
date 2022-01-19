@@ -13,10 +13,12 @@
 <!-- Figured out that I could do this with PHP. -->
 <?php
 
-$res = file_get_contents("https://api.mwi.dev/content/home");
-$data = json_decode($res);
+// ANCHOR: Don't need this stuff now that I'm using my own local database.
 
-$page = $data->data[$slug - 1];
+// $res = file_get_contents("https://api.mwi.dev/content/home");
+// $data = json_decode($res);
+
+// $page = $data->data[$slug - 1];
 
 ?>
 
@@ -26,9 +28,9 @@ $page = $data->data[$slug - 1];
   <section id="contentArea">
     <div>
       <div class="separator">
-        <h1>{{$page->title}}</h1>
+        <h1>{{$content->title}}</h1>
       </div>
-      <p>{{$page->content}}</p>
+      <p>{{$content->content}}</p>
     </div>
   </section>
   <div class="back">

@@ -13,22 +13,15 @@
 @endsection
 
 <?php
-$res = file_get_contents("https://api.mwi.dev/content/contact");
-$data = json_decode($res);
 
-$array = $data->data[0];
+$title = $content[0]->title;
 
-
-// ANCHOR: TITLE
-$title = $array->title;
-// Gets everything until the first token/character (second argument)
 $firstWord = strtok($title, " ");
-// Explodes and puts each string separated by a space into an array
 $secondWord = explode(" ", $title);
 
-// ANCHOR: Content
-$content = $array->content;
+$content = $content[0]->content;
 $sentence = explode(". ", $content);
+
 ?>
 
 @if(session('message'))

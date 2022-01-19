@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Models\Content;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use App\Http\Controllers\ContactController;
 */
 
 Route::get('/{name}', function () {
-  return view('home');
+  $content = Content::latest()->orderBy('id', 'desc')->get();
+  return view('home', ['contentItems' => $content]);
 })->where('name', 'home|');
 
 Route::get('/contact', [ContactController::class, 'index']);
@@ -29,5 +31,7 @@ Route::get('/learnmore', function () {
 
 Route::get('learnmore/{id}', function ($id) {
 
-  return view('learnmore/index', ['slug' => $id]);
+  $content = Content::findOrFail($id);
+  // Probably should have called this "show" instead of "index". For naming convention purposes but that's okay.
+  return view('learnmore/index', ['content' => $content]);
 });
